@@ -1,0 +1,37 @@
+name: CICD
+
+on:
+  push:
+    branches:   # ✅ correct spelling
+      - main    # ✅ push to main branch triggers workflow
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v3  # ✅ not 'users', correct 'uses'
+      
+      - name: Login to Docker Hub
+        run: echo "your_password_here" | docker login -u "your_dockerhub_username" --password-stdin
+
+      - name: Build Docker Image
+        run: docker build -t your_dockerhub_username/reactjs-app .
+
+      - name: Publish Image to Docker Hub
+        run: docker push your_dockerhub_username/reactjs-app:latest
+
+  deploy:
+    needs: build
+    runs-on: aws-ec2  # your self-hosted runner name
+
+    steps:
+      - name: Pull image from Docker Hub
+        run: docker pull your_dockerhub_username/reactjs-app:latest
+
+      - name: Delete Old Container
+        run: docker rm -f reactcontainer || true
+
+      - name: Run Docker Container
+        run: docker run -d -p 5173:80 --name reactcontainer your_dockerhub_username/reactjs-app:latest
