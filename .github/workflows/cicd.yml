@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Pull image from Docker Hub
-        run: sudo docker pull mdnihal/reactjs-app:latest
+        run: docker pull mdnihal/reactjs-app:latest
 
       - name: Delete Old Container
         run: docker rm -f reactcontainer || true
