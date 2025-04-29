@@ -4,14 +4,8 @@ function App() {
 
   return (
     <>
-    <h1 className='mb-5' style={{color:'#E9762B'}}>Amazon DSP api(Demand-Side Platform) </h1>
-    <h2>My Ordered List</h2>
-  <ol>
-    <li>First item</li>
-    <li>Second item</li>
-    <li>Third item</li>
-    <li>Fourth item</li>
-  </ol>
+    <h1 className='mb-5' style={{color:'#E9762B'}}>Amazon adevertisin DSP api(Demand-Side Platform) hello world</h1>
+  
     </>
   )
 }
